@@ -8,8 +8,11 @@ ENV DEBIAN_FRONTEND=non-interactive
 COPY ./*.sh .
 
 # Make startup.sh executable
-RUN chmod +x startup.sh && \
-    chmod +x config.sh && \
+RUN chmod +x ./startup.sh && \
+    chmod +x ./config.sh && \
+    sed -i -e 's/\r$//' startup.sh && \
+    sed -i -e 's/\r$//' config.sh && \
     ./startup.sh
 
-EXPOSE 15672
+# Expose ports
+EXPOSE 5672 15672

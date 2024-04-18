@@ -1,6 +1,9 @@
-# This is an example demonstrating the use of RabbitMQ
+# Examples demonstrating the use of RabbitMQ
 
-## 1. Install and set up
+#### *There are several examples here, each lies in a separated package with its own instruction.*
+#### *These instructions assume that you are using IntelliJ IDEA and login as admin `cc-admin`, password is `taxi123`.*
+
+## 1. Install RabbitMQ
 #### Start Docker engine or Docker desktop on your machine.
 #### Build the Docker image:
 ```
@@ -9,7 +12,7 @@ docker build -t ubuntu-rabbitmq .
 ---
 #### Create a container:
 ```
-docker run -d --hostname my-rabbit --name my-rabbit --mount type=bind,src="$(pwd)",target=/app -p 5000:15672 -it ubuntu-rabbitmq bash
+docker run -d --hostname my-rabbit --name my-rabbit -p 5672:5672 -p 15672:15672 -it ubuntu-rabbitmq bash
 ```
 ---
 ## 2. Configure and start RabbitMQ
@@ -25,7 +28,6 @@ docker exec -it my-rabbit bash
 ---
 #### Go to the web-UI management console:
 ```
-http://localhost:5000
+http://localhost:15672
 ```
 ---
-#### Login as the admin `cc-admin` or the development user `cc-dev`. Password is `taxi123`

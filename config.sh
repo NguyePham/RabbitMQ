@@ -18,6 +18,6 @@ rabbitmqctl add_user cc-dev taxi123
 # Create a vhost called cc-dev-vhost
 rabbitmqctl add_vhost cc-dev-vhost
 
-# Give the two users full rights on the created vhost
+# Give the two users full rights on the cc-dev-vhost vhost
 rabbitmqctl set_permissions -p cc-dev-vhost cc-admin ".*" ".*" ".*"
 rabbitmqctl set_permissions -p cc-dev-vhost cc-dev ".*" ".*" ".*"
