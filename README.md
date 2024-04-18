@@ -1,7 +1,7 @@
 # Examples demonstrating the use of RabbitMQ
 
 #### *There are several examples here, each lies in a separated package with its own instruction.*
-#### *These instructions assume that you are using IntelliJ IDEA and login as admin `cc-admin`, password is `taxi123`.*
+#### *These instructions assume that you have logged in as user `cc-admin`, password `taxi123`.*
 
 ## 1. Install RabbitMQ
 #### Start Docker engine or Docker desktop on your machine.
@@ -26,7 +26,7 @@ docker exec -it my-rabbit bash
 ./config.sh
 ```
 ---
-#### Go to the web-UI management console:
+#### Go to the web-UI management console (optionally):
 ```
 http://localhost:15672
 ```
