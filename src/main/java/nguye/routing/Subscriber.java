@@ -1,15 +1,14 @@
-package nguye.pubsub;
+package nguye.routing;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.*;
 
 import java.nio.charset.StandardCharsets;
 
 public class Subscriber {
 
-    private final static String EXCHANGE_NAME = "fanout_type";
+    private final static String EXCHANGE_NAME = "direct_type";
+    private static final String BINDING_KEY_ONE = "binding1";
+    private static final String BINDING_KEY_TWO = "binding2";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
@@ -22,19 +21,26 @@ public class Subscriber {
         Channel channel = connection.createChannel();
 
         // Connect the consumer to the same exchange as the publisher
-        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
-        // Declare a temporary queue. Once all the consumers have been disconnected from the queue, it will be
-        // automatically deleted
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+
+        // Declare a temporary queue
         String queueName = channel.queueDeclare().getQueue();
-        // Create a binding between the fanout exchange and the temporary queue
-        channel.queueBind(queueName, EXCHANGE_NAME, "");
+
+        // Create bindings
+        // We have two types of message
+        // Subscriber 1 can receive only the first type of message and subscriber 2 can receive both
+        channel.queueBind(queueName, EXCHANGE_NAME, BINDING_KEY_ONE);
+        if (argv[0].equals("sub2")) {
+            channel.queueBind(queueName, EXCHANGE_NAME, BINDING_KEY_TWO);
+        }
 
         System.out.println(" [*]" + argv[0] + ": Waiting for messages...");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x]" + argv[0] + ": Received '" + message + "'");
+            System.out.println(" [x]" + argv[0] + ": Received '" + delivery.getEnvelope().getRoutingKey() + "':'" + message + "'");
         };
+
         // Tell the consumer to consume messages from the connected queue
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }
