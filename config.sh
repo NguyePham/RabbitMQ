@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Start the rabbitMQ server as a service
-systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
-systemctl status rabbitmq-server
-
 # Enable the web UI management console
 rabbitmq-plugins enable rabbitmq_management
 
