@@ -18,7 +18,6 @@ public class Worker {
         factory.setUsername("cc-admin");
         factory.setPassword("taxi123");
         factory.setVirtualHost("cc-dev-vhost");
-        // Use IntelliJ to terminate the process of Receive.java
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 

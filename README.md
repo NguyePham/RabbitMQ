@@ -1,6 +1,6 @@
 # Examples demonstrating the use of RabbitMQ
 
-#### *There are several examples here, each lies in a separated package with its own instruction.*
+#### *There are several examples here, each lies in a separated package with its own README.md.*
 #### *These instructions assume that you have logged in as user `cc-admin`, password `taxi123`.*
 
 ## 1. Install RabbitMQ
