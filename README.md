@@ -1,3 +1,5 @@
+Phạm Minh Nguyên - 21020084 - INT3105 1
+
 # Examples demonstrating the use of RabbitMQ
 
 #### *There are several examples here, each lies in a separated package with its own README.md.*
@@ -21,8 +23,9 @@ docker run -d --hostname my-rabbit --name my-rabbit -p 5672:5672 -p 15672:15672 
 docker exec -it my-rabbit bash
 ```
 ---
-#### Start the RabbitMQ server as a service:
+#### Enable and start the RabbitMQ server as a service:
 ```
+systemctl enable rabbitmq-server
 systemctl start rabbitmq-server
 ```
 ---
